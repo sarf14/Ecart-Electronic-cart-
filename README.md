@@ -1,0 +1,2 @@
+# mini_project
+ djnago_project_half_implementation
