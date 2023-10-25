@@ -16,11 +16,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from app1 import views
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', include('shop.urls')),
+    path('user/', include('app1.urls')),
+    # path('signup/', views.SignupPage, name='signup'),
+    # path('login/', views.LoginPage, name='login'),
+    # path('signup/', signaction),
+    # path('login/', loginaction),
+    # path("signup/", views.register_request, name="register"),
     # path('blog/', include('blog.urls')),
     path('', views.index)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

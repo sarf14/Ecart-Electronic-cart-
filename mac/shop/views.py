@@ -16,7 +16,7 @@ def index(request):
         n = len(prod)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allProds.append([prod, range(1, nSlides), nSlides])
-    params = {'allProds':allProds}
+    params = {'allProds': allProds}
     return render(request, 'shop/index.html', params)
 
 
@@ -25,7 +25,7 @@ def about(request):
 
 
 def contact(request):
-    if request.method=="POST":
+    if request.method == "POST":
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
         phone = request.POST.get('phone', '')
@@ -36,12 +36,12 @@ def contact(request):
 
 
 def tracker(request):
-    if request.method=="POST":
+    if request.method == "POST":
         orderId = request.POST.get('orderId', '')
         email = request.POST.get('email', '')
         try:
             order = Orders.objects.filter(order_id=orderId, email=email)
-            if len(order)>0:
+            if len(order) > 0:
                 update = OrderUpdate.objects.filter(order_id=orderId)
                 updates = []
                 for item in update:
@@ -61,14 +61,13 @@ def search(request):
 
 
 def productView(request, myid):
-
     # Fetch the product using the id
     product = Product.objects.filter(id=myid)
-    return render(request, 'shop/prodView.html', {'product':product[0]})
+    return render(request, 'shop/prodView.html', {'product': product[0]})
 
 
 def checkout(request):
-    if request.method=="POST":
+    if request.method == "POST":
         items_json = request.POST.get('itemsJson', '')
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
@@ -84,7 +83,7 @@ def checkout(request):
         update.save()
         thank = True
         id = order.order_id
-        return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
+        return render(request, 'shop/checkout.html', {'thank': thank, 'id': id})
     return render(request, 'shop/checkout.html')
 
 
@@ -97,6 +96,7 @@ def searchMatch(query, item):
         return True
     else:
         return False
+
 
 def search(request):
     query = request.GET.get('search')
@@ -112,7 +112,8 @@ def search(request):
         if len(prod) != 0:
             allProds.append([prod, range(1, nSlides), nSlides])
     params = {'allProds': allProds, "msg": ""}
-    if len(allProds) == 0 or len(query)<4:
+    if len(allProds) == 0 or len(query) < 4:
         params = {'msg': "Please make sure to enter relevant search query"}
     return render(request, 'shop/search.html', params)
+
 
