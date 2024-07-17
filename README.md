@@ -1,2 +1,2 @@
 # mini_project
- djnago_project_half_implementation
+Implementation of ecommerce website using django stack
